@@ -73,9 +73,7 @@ subject to NeriRigaPariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and
 	cella[i,a,k/2] >= cella[i,b,k];
 subject to NeriRigaPariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
 	cella[i,b,k/2] >= cella[i,a,k];
-	
-
-subject to NeriRigaDispariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
+	subject to NeriRigaDispariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[i,b,2*k] >= cella[i,a,k];
 subject to NeriRigaDispariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[i,a,2*k] >= cella[i,b,k];
@@ -84,7 +82,7 @@ subject to NeriRigaDispariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 
 subject to NeriRigaDispariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2!= 0}:
 	cella[i,b,k] = 0;
 
-
+#nessun obiettivo in quanto è un problema CSP
 
 
 					

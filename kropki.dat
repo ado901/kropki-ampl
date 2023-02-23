@@ -1,5 +1,4 @@
-# Sudoku puzzle obtained from:
-# https://i.stack.imgur.com/IA61i.jpg
+
 
 param maxDim := 9;
 param maxNum := 9;
