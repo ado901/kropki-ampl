@@ -1,0 +1,7 @@
+reset;
+option solver gurobi;
+
+model kropki.mod;
+data kropki.dat;
+solve;
+for{i in N} {for{j in N} {for {k in N} {if(p[i,j,k] = 1) then {printf "%3i", k;}} } printf "\n";}
