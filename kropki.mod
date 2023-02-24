@@ -43,40 +43,40 @@ subject to BianchiVerticaliRx{(i,a,b) in BIANCOR, k in NUMERI: k + 1 < maxNum+1 
 
 
 #VINCOLI PER I NERI
-#il pattern è di valutare i numeri sotto la prima metà del range e discriminarli tra pari e dispari e viene applicata una simmetria rispetto al pallino
+#il pattern è di valutare i numeri sotto la prima metà del range e discriminarli tra pari e dispari
 # la stessa cosa è stata fatta anche per i numeri nella seconda metà applicando vincoli diversi a seconda se pari o dispari: dispari è la condizione in cui non può mai esserci
 
 subject to NeriColPariPiccoli1{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
 	cella[b,j,2*k] + cella[b,j,k/2] >= cella[a,j,k];							
-subject to NeriColPariPiccoli2{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
-	cella[a,j,2*k] + cella[a,j,k/2] >= cella[b,j,k];
+/* subject to NeriColPariPiccoli2{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
+	cella[a,j,2*k] + cella[a,j,k/2] >= cella[b,j,k]; */
 subject to NeriColPariGrandi1{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
 	cella[b,j,k/2] >= cella[a,j,k];
-subject to NeriColPariGrandi2{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
-	cella[a,j,k/2] >= cella[b,j,k];
+/* subject to NeriColPariGrandi2{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
+	cella[a,j,k/2] >= cella[b,j,k]; */
 subject to NeriColDispariPiccoli1{(j,a,b) in NEROC, k in N: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[b,j,2*k] >= cella[a,j,k];
-subject to NeriColDispariPiccoli2{(j,a,b) in NEROC, k in N: 2*k < maxNum+1 and k mod 2 != 0}:
-	cella[a,j,2*k] >= cella[b,j,k];
+/* subject to NeriColDispariPiccoli2{(j,a,b) in NEROC, k in N: 2*k < maxNum+1 and k mod 2 != 0}:
+	cella[a,j,2*k] >= cella[b,j,k]; */
 subject to NeriColDispariGrandi1{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 != 0}:
 	cella[a,j,k] =0;
 subject to NeriColDispariGrandi2{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 != 0}:
 	cella[b,j,k] =0;
 
 
-#condizione doppio da sinistra a destra e viceversa.
+
 subject to NeriRigaPariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
 	cella[i,b,2*k] + cella[i,b,k/2] >= cella[i,a,k];							
-subject to NeriRigaPariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
-	cella[i,a,2*k] + cella[i,a,k/2] >= cella[i,b,k]; 
-subject to NeriRigaPariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
-	cella[i,a,k/2] >= cella[i,b,k];
+/* subject to NeriRigaPariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
+	cella[i,a,2*k] + cella[i,a,k/2] >= cella[i,b,k]; */ 
+/* subject to NeriRigaPariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
+	cella[i,a,k/2] >= cella[i,b,k]; */
 subject to NeriRigaPariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
 	cella[i,b,k/2] >= cella[i,a,k];
-	subject to NeriRigaDispariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
+subject to NeriRigaDispariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[i,b,2*k] >= cella[i,a,k];
-subject to NeriRigaDispariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
-	cella[i,a,2*k] >= cella[i,b,k];
+/* subject to NeriRigaDispariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
+	cella[i,a,2*k] >= cella[i,b,k]; */
 subject to NeriRigaDispariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2 != 0}:
 	cella[i,a,k] = 0;
 subject to NeriRigaDispariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2!= 0}:
