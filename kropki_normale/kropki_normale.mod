@@ -32,55 +32,49 @@ subject to Riquadri {rx in RIQ, ry in RIQ, n in N}:
 #le condizioni proposte ora sfruttano la condizione di esclusività delle celle relative allo stesso numero
 #condizione consecutiva da sopra a sotto e viceversa. Quando il numero k è minore di 9 e maggiore di 1
 subject to BianchiOrizzSu{(j,a,b) in BIANCOC, k in NUMERI: k + 1 < maxNum+1 and k - 1 > 0}:
-	cella[b,j,k+1] + cella[b,j,k-1] >= cella[a,j,k];						#allora la cella sotto se quella sopra è occupata da k deve contenere il numero successivo o quello precedente
+	cella[b,j,k+1] + cella[b,j,k-1] >= cella[a,j,k];
 subject to BianchiOrizzSotto{(j,a,b) in BIANCOC, k in NUMERI: k + 1 < maxNum+1 and k - 1 > 0}:
-	cella[a,j,k+1] + cella[a,j,k-1] >= cella[b,j,k];						#allora la cella sopra se quella sotto è occupata da k deve contenere il numero successivo o quello precedente							#allora la cella sopra se quella sotto è occupata da k deve contenere il doppio o la sua metà
+	cella[a,j,k+1] + cella[a,j,k-1] >= cella[b,j,k];
 #condizione consecutiva da sinistra a destra e viceversa. Quando il numero k è minore di 9 e maggiore di 1
 subject to BianchiVerticaliSx{(i,a,b) in BIANCOR, k in NUMERI: k + 1 < maxNum+1 and k - 1 > 0}:
-	cella[i,b,k+1] + cella[i,b,k-1] >= cella[i,a,k]; 						#allora la cella a destra se quella a sinistra è occupata da k deve contenere il numero successivo o quello precedente
+	cella[i,b,k+1] + cella[i,b,k-1] >= cella[i,a,k];
 subject to BianchiVerticaliRx{(i,a,b) in BIANCOR, k in NUMERI: k + 1 < maxNum+1 and k - 1 > 0}:
-	cella[i,a,k+1] + cella[i,a,k-1] >= cella[i,b,k];						#allora la cella a sinistra se quella a destra è occupata da k deve contenere il numero successivo o quello precedente
-
+	cella[i,a,k+1] + cella[i,a,k-1] >= cella[i,b,k];
 
 #VINCOLI PER I NERI
 #il pattern è di valutare i numeri sotto la prima metà del range e discriminarli tra pari e dispari
-# la stessa cosa è stata fatta anche per i numeri nella seconda metà applicando vincoli diversi a seconda se pari o dispari: dispari è la condizione in cui non può mai esserci
+# la stessa cosa è stata fatta anche per i numeri nella seconda metà applicando vincoli diversi a seconda se pari o dispari:
+# dispari è la condizione in cui non può mai esserci
 
 subject to NeriColPariPiccoli1{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
 	cella[b,j,2*k] + cella[b,j,k/2] >= cella[a,j,k];							
-/* subject to NeriColPariPiccoli2{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
-	cella[a,j,2*k] + cella[a,j,k/2] >= cella[b,j,k]; */
-subject to NeriColPariGrandi1{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
+subject to NeriColPariPiccoli2{(j,a,b) in NEROC, k in NUMERI: 2*k < maxNum+1 and k mod 2 = 0}:
+	cella[a,j,2*k] + cella[a,j,k/2] >= cella[b,j,k];
+
+/* subject to NeriColPariGrandi1{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
 	cella[b,j,k/2] >= cella[a,j,k];
-/* subject to NeriColPariGrandi2{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 = 0}:
-	cella[a,j,k/2] >= cella[b,j,k]; */
 subject to NeriColDispariPiccoli1{(j,a,b) in NEROC, k in N: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[b,j,2*k] >= cella[a,j,k];
-/* subject to NeriColDispariPiccoli2{(j,a,b) in NEROC, k in N: 2*k < maxNum+1 and k mod 2 != 0}:
-	cella[a,j,2*k] >= cella[b,j,k]; */
 subject to NeriColDispariGrandi1{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 != 0}:
 	cella[a,j,k] =0;
 subject to NeriColDispariGrandi2{(j,a,b) in NEROC, k in N: 2*k > maxNum+1 and k mod 2 != 0}:
-	cella[b,j,k] =0;
+	cella[b,j,k] =0; */
 
 
 
 subject to NeriRigaPariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
 	cella[i,b,2*k] + cella[i,b,k/2] >= cella[i,a,k];							
-/* subject to NeriRigaPariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
-	cella[i,a,2*k] + cella[i,a,k/2] >= cella[i,b,k]; */ 
-/* subject to NeriRigaPariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
-	cella[i,a,k/2] >= cella[i,b,k]; */
-subject to NeriRigaPariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
+subject to NeriRigaPariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2= 0}:
+	cella[i,a,2*k] + cella[i,a,k/2] >= cella[i,b,k]; 
+
+/* subject to NeriRigaPariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2= 0}:
 	cella[i,b,k/2] >= cella[i,a,k];
 subject to NeriRigaDispariPiccoli1{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
 	cella[i,b,2*k] >= cella[i,a,k];
-/* subject to NeriRigaDispariPiccoli2{(i,a,b) in NEROR, k in NUMERI: 2*k < maxNum+1 and k mod 2 != 0}:
-	cella[i,a,2*k] >= cella[i,b,k]; */
 subject to NeriRigaDispariGrandi1{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2 != 0}:
 	cella[i,a,k] = 0;
 subject to NeriRigaDispariGrandi2{(i,a,b) in NEROR, k in NUMERI: 2*k > maxNum+1 and k mod 2!= 0}:
-	cella[i,b,k] = 0;
+	cella[i,b,k] = 0; */
 
 #nessun obiettivo in quanto è un problema CSP
 

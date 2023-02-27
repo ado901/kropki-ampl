@@ -1,0 +1,7 @@
+reset;
+option solver cplex;
+option presolve 0;
+model kropki_normale.mod;
+data kropki_normale.dat;
+solve;
+for{i in N} {for{j in N} {for {k in N} {if(cella[i,j,k] = 1) then {printf "%3i", k;}} } printf "\n";}

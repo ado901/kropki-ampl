@@ -4,11 +4,11 @@ param maxDim := 9;
 param maxNum := 9;
 
 # (row, col, number)
-set FIXED :=;
+set FIXED :=
 /* 4 3 5
 5 2 9
 5 8 5
-6 7 1; */
+6 7 1 */;
 
 set NEROR :=
 1 1 2
